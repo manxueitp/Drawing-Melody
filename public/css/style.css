@@ -1,0 +1,226 @@
+form {
+	background: #000; 
+	padding: 3px; 
+	position: fixed; 
+	bottom: 0; 
+	width: 100%; 
+}
+form input { 
+    border: 0; 
+    padding: 10px; 
+    width: 90%; 
+    margin-right: .5%; 
+}
+form button { 
+     width: 9%; 
+     background: 
+     rgb(130, 224, 255); 
+     border: none; 
+     padding: 10px; 
+ }
+
+/*------------------------------------------------------------*/
+/* Fix user-agent */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  word-wrap: break-word;
+}
+
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Login Page */
+
+.login.page {
+  background-color: #000;
+}
+
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 400px;
+}
+
+.login.page .title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.login.page .title, .login.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
+}
+
+/* drawing page */
+
+.drawing.page {
+  display: none;
+}
+
+/* Font */
+
+.messages {
+  font-size: 150%;
+}
+
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+/* Messages */
+
+.drawingArea {
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
+
+.username {
+  float: left;
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+/*------------------drawing app----------------------------------------*/
+a:link { text-decoration: underline; }
+a:active { text-decoration: underline; }
+a:visited { text-decoration: underline; }
+
+a {
+    font-family: arial, helvetica, non-serif;
+    font-size: 9pt;
+    color: #0909AA;    
+	background-color: #EEEEEE;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-family: 'Pathway Gothic One', sans-serif;
+    display: block;
+    color: #f15556;
+    font-size: 70px;
+    text-transform: uppercase;
+    font-family: 'Pathway Gothic One', sans-serif;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+#map{
+    width: 100%;
+    height: 200px;
+    background: #f32456;
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+}
+h2 {
+    text-transform: uppercase;
+}
+
+h3 {
+    text-transform: uppercase;
+}
+
+#canvas{
+    border: 1px solid #0590fb;
+    margin: 0 auto;
+    width: 1200px;
+    padding: 0px;
+
+}
+canvas{
+    width: 100%;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+body 
+{
+    font-family: arial, helvetica, non-serif;
+    font-size: 9pt;
+    color: #050505;    
+    margin:0px auto;
+    background: #fff;
+    text-align: center;
+}
+/*client*/
+#myElement{
+  background: silver;
+  height: 300px;
+  text-align: center;
+  font: 30px/300px Helvetica, Arial, sans-serif;
+}
+
+/*----------------------------------*/
+/* Fix user-agent */
+
