@@ -92,7 +92,7 @@ var Mover = function(id, m, n) {
   this.display = function() {
     //fill(this.bcolor);
     //console.log(this.positions)
-    //this.strokeSize(9,14);
+    this.strokeSize(9,14);
     for(var i=0; i<this.positions.length;i++){
     //ellipse(this.positions[i].x, this.positions[i].y, m*8-i/3, m*8-i/3);
     //this.uppositions.push(this.positions[i]);

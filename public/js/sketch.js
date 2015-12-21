@@ -30,6 +30,10 @@ var currentUsers=[];
 // };
 function setup() {
   width = document.getElementById('canvas').offsetWidth;
+  console.log(windowWidth);
+  if (width> windowWidth){
+    width=windowWidth;
+  }
   console.log(width);
   var myCanvas = createCanvas(width,800);
   myCanvas.parent('canvas');
