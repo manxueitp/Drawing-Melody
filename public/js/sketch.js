@@ -208,8 +208,10 @@ function draw() {
   }
  }
   //console.log(clientPaintStatus);
-  if (clientPaintStatus) {
-    clientMover.display();    
+  for (var i = 0; i < clientMovers.length; i++) {
+    if (clientPaintStatus) {
+      clientMovers[i].display();    
+    }
   }
 
   for (var i = 0; i < cMovers.length; i++) {
