@@ -3,14 +3,14 @@ var moversNum;
 var colorInt;
 var k=0;
 var osc, envelope, fft;
-var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
+var scaleArray = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84];
 
 var Mover = function(id, m, n) {
   this.mass = m;
   this.note=n;
   this.id= id;
   
-  this.lifespan = 1000.0;
+  this.lifespan = 2000.0;
   this.alpha=this.lifespan/3;
   this.r=r[this.note];
   this.g=g[this.note];
@@ -26,8 +26,13 @@ var Mover = function(id, m, n) {
   this.freqValue = midiToFreq(this.midiValue);
   
   this.osc = new p5.Oscillator();
-  this.freqtemp=floor(map(mouseX,0,width,0, 500));
-  this.osc.freq(this.freqValue+this.freqtemp);
+  //this.freqtemp=floor(map(mouseX,0,width,0, 500));
+  
+  this.scaleNum=floor(map(mouseX,0,width,0,22));
+  this.changeMidiValue=scaleArray[this.scaleNum];
+  this.changeFreqValue = midiToFreq(this.changeMidiValue);
+  //this.osc.freq(this.freqValue+this.freqtemp);
+  this.osc.freq(this.changeFreqValue);
 
   // time, ampLevel
   this.env = new p5.Env(0.01, 1.0, 0.3, 0.8, 0.5, 0.3, 3, 0.0);
@@ -40,7 +45,10 @@ var Mover = function(id, m, n) {
   this.gain.connect();
   this.env.triggerAttack();
 
-  this.freqtemp=0;
+  //this.freqtemp=0;
+  this.changeFreqValue=0;
+  //this.changeFreqValue=0;
+  //this.changeMidiValue=0;
   //this.amptemp= this.mass;
 
   this.count=0;
@@ -48,13 +56,13 @@ var Mover = function(id, m, n) {
   this.addPosition = function(x, y) {
 	  this.position = createVector(x, y);
 	  num = this.positions.length;
-    //moversNum=(this.mass*8-6);
-    this.freqtemp=floor(map(x,0,width,0, 500));
-
-    // come back to this!
-    // this.amptemp=(this.mass-5)/40;
-
-    this.osc.freq(this.freqValue+this.freqtemp);
+    //this.freqtemp=floor(map(x,0,width,0, 500));
+    //this.freqtemp=floor(map(x,0,width,0, 500));
+    //this.osc.freq(this.freqValue+this.freqtemp);
+    this.changeMelody();
+    this.osc.freq(this.changeFreqValue);
+    //console.log(this.scaleNum);
+    //console.log(this.changeMidiValue);
     
 
     moversNum=190;
@@ -92,7 +100,7 @@ var Mover = function(id, m, n) {
   this.display = function() {
     //fill(this.bcolor);
     //console.log(this.positions)
-    this.strokeSize(9,14);
+    //this.strokeSize(9,14);
     for(var i=0; i<this.positions.length;i++){
     //ellipse(this.positions[i].x, this.positions[i].y, m*8-i/3, m*8-i/3);
     //this.uppositions.push(this.positions[i]);
@@ -110,7 +118,7 @@ var Mover = function(id, m, n) {
 
   this.checkEdges = function() {
     // var newAmp = constrain( this.amptemp*this.lifespan/255, 0, 1) ;
-    var newAmp = map(this.lifespan, 1000, 0, 1, 0);
+    var newAmp = map(this.lifespan, 2000, 0, 1, 0);
 
   	for(var i=0; i<this.positions.length;i++){
       if (this.positions[i].x > width) {
@@ -186,6 +194,17 @@ var Mover = function(id, m, n) {
   this.applyRepeller=function(r){
     var force = r.repel(this);
     this.applyForce(force);
+  }
+
+  this.changeMelody=function(){
+    //var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
+    scaleArray = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84];
+    this.scaleNum=floor(map(mouseX,0,width,0,22));
+    this.changeMidiValue=scaleArray[this.scaleNum];
+    this.changeFreqValue = midiToFreq(this.changeMidiValue);
+    //this.changeMidiValue=floor(map(mouseX,0,width,48,83));
+    //this.changeFreqValue = midiToFreq(this.changeMidiValue);
+
   }
 
 

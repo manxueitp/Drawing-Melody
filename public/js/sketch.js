@@ -30,11 +30,9 @@ var currentUsers=[];
 // };
 function setup() {
   width = document.getElementById('canvas').offsetWidth;
-  console.log(windowWidth);
   if (width> windowWidth){
     width=windowWidth;
   }
-  console.log(width);
   var myCanvas = createCanvas(width,800);
   myCanvas.parent('canvas');
 
@@ -106,7 +104,7 @@ function socketReceiver(){
       for (var i = 0; i < clientMovers.length; i++) {
           if (clientMovers[i].id === data.id) {
             cMovers.push(clientMovers[i]);
-            console.log(clientMovers[i].id );
+            //console.log(clientMovers[i].id );
           }
           
           clientPaintStatus = false;
@@ -167,7 +165,7 @@ function socketReceiver(){
       }
     });
 }//socket end
-
+//------mouse Event---------------------------------------------------
 function mousePressed() {
   var m = bSize/16+random(1,3);
   var bNote = Math.round(8*Math.random());
@@ -183,6 +181,7 @@ function mouseDragged() {
   sendmouse(randomId, mouseX,mouseY,clientPaintStatus);
 }
 
+//------touch Event----------------------------------------------
 function touchStarted() {
   var m = bSize/16+random(1,3);
   var bNote = Math.round(8*Math.random());
@@ -201,6 +200,26 @@ function touchMoved() {
 function draw() {
   background(255);
   
+  strokeWeight(2);
+  var interspace= width/scaleArray.length;
+  var halfNoteSpace=interspace/5;
+
+  stroke(250);
+  for(var i = 0; i < scaleArray.length; i++) {
+    line(i*interspace, 0, i*interspace, height);
+  }
+  for(var i = 0; i < scaleArray.length; i++) {
+    stroke(220);
+    fill(255);
+    rect(i*interspace, 0, interspace, 80);
+    if(i==1||i==2||i==4||i==5||i==6||i==8||i==9||i==11||i==12||i==13||i==15||i==16||i==18||i==19||i==20){
+      fill(220);
+      noStroke();
+      rect(i*interspace-halfNoteSpace, 0, halfNoteSpace*2, 46);
+    }
+  }
+  
+
   if (indicators!= []) {
     for (var i = 0; i < indicators.length; i++) {
       indicators[i].checkEdges();
@@ -272,7 +291,3 @@ function sendmovers(movers, bSize, bNote) {
   };
   socket.emit('othermovers',data);
 }
-//---------------- touch----------------------------------//
-canvas.addEventListener('touchmove', function(event) {
-  console.log("touchmove");
-}, false);

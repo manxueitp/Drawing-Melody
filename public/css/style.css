@@ -168,8 +168,8 @@ h1 {
     display: block;
     
     color:#fcdd0a;
-    color: #fd4a81;
-    font-size: 50px;
+    color: #FC1866;
+    font-size: 60px;
     font-weight: 400;
     font-family: 'Pathway Gothic One', sans-serif;
     margin: 0px;
@@ -191,11 +191,11 @@ h1 {
 }
 
 p{  
-  font-size: 20px;
+  font-size: 24px;
   margin: 0px;
-  margin-top: 5px;
-
-  color:#219eed;
+  margin-top: 8px;
+  font-weight: 700;
+  color:#04CAE8;
   font-family: 'Source Sans Pro', sans-serif;
 
 }
@@ -208,7 +208,7 @@ h3 {
 }
 
 #canvas{
-    border: 2px solid #0590fb;
+    border: 3px solid #0590fb;
     margin: 0 auto;
     padding: 0px;
     width: 80%;
@@ -241,7 +241,7 @@ body
     }
 @media screen and (max-width: 800px) {
     #canvas{
-      width:96%;
+      width:100%;
     }
 
 /*client*/
