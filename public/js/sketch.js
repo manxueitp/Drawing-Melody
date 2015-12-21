@@ -22,12 +22,15 @@ var indicators=[];
 var randomId;
 
 var repeller;
+var currentKey=0;
 
-// var clientMovers = {
 var width;
 var currentUsers=[];
 
-// };
+var interspace;
+var halfNoteSpace;
+
+
 function setup() {
   width = document.getElementById('canvas').offsetWidth;
   if (width> windowWidth){
@@ -93,6 +96,7 @@ function socketReceiver(){
       for (var i = 0; i < clientMovers.length; i++) {
           if (clientMovers[i].id === data.id) {
             clientMovers[i].addPosition(data.x, data.y);
+            currentKey=floor(data.x/interspace);
           }
         } 
       clientPaintStatus = true;
@@ -201,8 +205,8 @@ function draw() {
   background(255);
   
   strokeWeight(2);
-  var interspace= width/scaleArray.length;
-  var halfNoteSpace=interspace/5;
+  interspace= width/scaleArray.length;
+  halfNoteSpace=interspace/5;
 
   stroke(250);
   for(var i = 0; i < scaleArray.length; i++) {
@@ -229,9 +233,17 @@ function draw() {
   //console.log(clientPaintStatus);
   for (var i = 0; i < clientMovers.length; i++) {
     if (clientPaintStatus) {
-      clientMovers[i].display();    
+      clientMovers[i].display();  
+      fill('rgba(4,202,232, 0.1)');
+      //strokeWeight(interspace);
+      noStroke();
+      console.log(currentKey+"currentKey");
+      rect(currentKey*interspace,0,interspace,80);
+      //line(currentKey*interspace+interspace/2,0,currentKey*interspace+interspace/2,40)  
     }
   }
+
+  
 
   for (var i = 0; i < cMovers.length; i++) {
   var wind = createVector(0.01, 0);
@@ -242,8 +254,7 @@ function draw() {
   cMovers[i].checkEdges();
   if(indicators.length>0){
    cMovers[i].applyRepeller(indicator);}
-
-  cMovers[i].display();
+   cMovers[i].display();
     if ( cMovers[i].isDead() ) {
       cMovers[i].kill();
       cMovers.splice(i, 1);
@@ -291,3 +302,10 @@ function sendmovers(movers, bSize, bNote) {
   };
   socket.emit('othermovers',data);
 }
+
+$(window).bind(
+  'touchmove',
+   function(e) {
+    e.preventDefault();
+  }
+);
