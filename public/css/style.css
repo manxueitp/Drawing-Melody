@@ -1,9 +1,10 @@
+
 form {
-	background: #000; 
-	padding: 3px; 
-	position: fixed; 
-	bottom: 0; 
-	width: 100%; 
+  background: #000; 
+  padding: 3px; 
+  position: fixed; 
+  bottom: 0; 
+  width: 100%; 
 }
 form input { 
     border: 0; 
@@ -140,6 +141,7 @@ ul {
   margin: 0;
   overflow-y: scroll;
   padding: 10px 20px 10px 20px;
+  color: #219eed;
 }
 
 .username {
@@ -159,29 +161,43 @@ a {
     font-family: arial, helvetica, non-serif;
     font-size: 9pt;
     color: #0909AA;    
-	background-color: #EEEEEE;
+  background-color: #EEEEEE;
 }
 
 h1 {
-    text-transform: uppercase;
-    font-family: 'Pathway Gothic One', sans-serif;
     display: block;
-    color: #f15556;
-    font-size: 70px;
-    text-transform: uppercase;
+    
+    color:#fcdd0a;
+    color: #fd4a81;
+    font-size: 50px;
+    font-weight: 400;
     font-family: 'Pathway Gothic One', sans-serif;
     margin: 0px;
+    margin-top: 5px;
     padding: 0px;
+    font-family: 'Lobster', cursive;
+    
 
 }
 
 #map{
     width: 100%;
     height: 200px;
-    background: #f32456;
+    background: #fd4a81;
     color: #fff;
     font-weight: 700;
     font-size: 20px;
+
+}
+
+p{  
+  font-size: 20px;
+  margin: 0px;
+  margin-top: 5px;
+
+  color:#219eed;
+  font-family: 'Source Sans Pro', sans-serif;
+
 }
 h2 {
     text-transform: uppercase;
@@ -199,7 +215,7 @@ h3 {
 
 }
 canvas{
-    width: 100%;
+    width: 100% !important;
     padding: 0px;
     margin: 0 auto;
 }
@@ -210,8 +226,9 @@ body
     font-size: 9pt;
     color: #050505;    
     margin:0px auto;
-    background: #fff;
+    background: url(./noisebg.png) repeat #071145;
     text-align: center;
+ 
 }
 /*client*/
 #myElement{
@@ -224,3 +241,5 @@ body
 /*----------------------------------*/
 /* Fix user-agent */
 
+Status API Training Shop Blog About Pricing
+© 2015 GitHub, Inc. Terms Privacy Security Contact Help

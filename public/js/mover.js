@@ -5,9 +5,10 @@ var k=0;
 var osc, envelope, fft;
 var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
 
-var Mover = function(m, n) {
+var Mover = function(id, m, n) {
   this.mass = m;
   this.note=n;
+  this.id= id;
   
   this.lifespan = 1000.0;
   this.alpha=this.lifespan/3;
