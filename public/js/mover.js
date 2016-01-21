@@ -59,7 +59,7 @@ var Mover = function(id, m, n) {
     //this.freqtemp=floor(map(x,0,width,0, 500));
     //this.freqtemp=floor(map(x,0,width,0, 500));
     //this.osc.freq(this.freqValue+this.freqtemp);
-    this.changeMelody();
+    this.changeMelody(x);
     this.osc.freq(this.changeFreqValue);
     //console.log(this.scaleNum);
     //console.log(this.changeMidiValue);
@@ -196,10 +196,10 @@ var Mover = function(id, m, n) {
     this.applyForce(force);
   }
 
-  this.changeMelody=function(){
+  this.changeMelody=function(x){
     //var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
     scaleArray = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84];
-    this.scaleNum=floor(map(mouseX,0,width,0,22));
+    this.scaleNum=floor(map(x,0,width,0,22));
     this.changeMidiValue=scaleArray[this.scaleNum];
     this.changeFreqValue = midiToFreq(this.changeMidiValue);
     //this.changeMidiValue=floor(map(mouseX,0,width,48,83));

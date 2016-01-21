@@ -68,7 +68,7 @@ io.on('connection',
     socket.on('addposition',
       function(data) {
         // Data comes in as whatever was sent, including objects
-        console.log("Received: 'mouse' " + data.x + " " + data.y);
+//        console.log("Received: 'mouse' " + data.x + " " + data.y);
         // Send it to all other clients
         io.sockets.emit('addposition', data);
       }
@@ -77,7 +77,7 @@ io.on('connection',
     socket.on('newmover',
       function(data) {
         // Data comes in as whatever was sent, including objects
-        console.log("Received: 'newmover' " + data.mass + " " + data.note+" "+ "startIfCp"+ data.ifCP );
+        //console.log("Received: 'newmover' " + data.mass + " " + data.note+" "+ "startIfCp"+ data.ifCP );
       
         // Send it to all other clients
         io.sockets.emit('newmover', data);
@@ -86,7 +86,7 @@ io.on('connection',
     );
     socket.on('finishmover',
       function(data) {
-        console.log("Received: 'finishmover' " + data.ifCP );
+       // console.log("Received: 'finishmover' " + data.ifCP );
         io.sockets.emit('finishmover', data);
       }
     );
@@ -94,7 +94,7 @@ io.on('connection',
     socket.on('othermovers',
       function(data) {
         // Data comes in as whatever was sent, including objects
-        console.log("Received: 'othermovers' " + data.movers + " " + data.size );
+       // console.log("Received: 'othermovers' " + data.movers + " " + data.size );
       
         // Send it to all other clients
         io.sockets.emit('othermovers', data);
@@ -123,17 +123,7 @@ io.on('connection',
     });
 
 //--------------------------------------------------------------------
-    socket.on('initialClient', function(data){
-      console.log("initial client");
-      //console.log("Received: 'initial movement' " + data.x + " " + data.y+  " " + data.id );
-      io.sockets.emit('initialClient', data);
-    });
-
-    socket.on('updateMovement', function(data){
-      //console.log("Client sent accelerometer info");
-      console.log("Received: 'update movement' " + data.x + " " + data.y+  " " + data.id );
-      io.sockets.emit('updateMovement', data);
-    });
+   
 
 });
 
