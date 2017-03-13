@@ -19,7 +19,7 @@ var usersPosY=[];
 var userList=[];
 var thisUser={};
 
-//-----------------------------socket----------------
+//-----------------------------socket-----------------------------//
 io.on('connection', 
   function (socket) {
     var addedUser = false;
@@ -68,7 +68,7 @@ io.on('connection',
     socket.on('addposition',
       function(data) {
         // Data comes in as whatever was sent, including objects
-//        console.log("Received: 'mouse' " + data.x + " " + data.y);
+        // console.log("Received: 'mouse' " + data.x + " " + data.y);
         // Send it to all other clients
         io.sockets.emit('addposition', data);
       }
@@ -121,9 +121,5 @@ io.on('connection',
         io.sockets.emit('disconnect', socket.id);
       }
     });
-
-//--------------------------------------------------------------------
-   
-
 });
 

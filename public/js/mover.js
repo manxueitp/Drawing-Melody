@@ -45,26 +45,16 @@ var Mover = function(id, m, n) {
   this.gain.connect();
   this.env.triggerAttack();
 
-  //this.freqtemp=0;
   this.changeFreqValue=0;
-  //this.changeFreqValue=0;
-  //this.changeMidiValue=0;
-  //this.amptemp= this.mass;
 
   this.count=0;
 
   this.addPosition = function(x, y) {
 	  this.position = createVector(x, y);
 	  num = this.positions.length;
-    //this.freqtemp=floor(map(x,0,width,0, 500));
-    //this.freqtemp=floor(map(x,0,width,0, 500));
-    //this.osc.freq(this.freqValue+this.freqtemp);
     this.changeMelody(x);
     this.osc.freq(this.changeFreqValue);
-    //console.log(this.scaleNum);
-    //console.log(this.changeMidiValue);
     
-
     moversNum=190;
     if(num<moversNum){
       this.positions.push(this.position);
@@ -98,13 +88,7 @@ var Mover = function(id, m, n) {
   };
 
   this.display = function() {
-    //fill(this.bcolor);
-    //console.log(this.positions)
-    //this.strokeSize(9,14);
     for(var i=0; i<this.positions.length;i++){
-    //ellipse(this.positions[i].x, this.positions[i].y, m*8-i/3, m*8-i/3);
-    //this.uppositions.push(this.positions[i]);
-    //this.alpha=100-i;
     strokeWeight(m*8+i/4);
     var mr=this.r-1*i;
     var mg=this.g-1*i;
@@ -140,8 +124,6 @@ var Mover = function(id, m, n) {
         this.env.play(this.osc);    
       }
        else {
-      	//this.osc.amp(0, 0.1);
-        //this.osc.stop();
       }
     }
   };
@@ -181,7 +163,6 @@ var Mover = function(id, m, n) {
     console.log('stop playing!');
     this.env.triggerRelease(this.osc);
     this.gain.amp(0, 0);
-    // this.osc.amp(0, 0.1);
     this.osc.stop();
   }
 
@@ -191,21 +172,10 @@ var Mover = function(id, m, n) {
     this.env.dispose();
   }
 
-  this.applyRepeller=function(r){
-    var force = r.repel(this);
-    this.applyForce(force);
-  }
-
   this.changeMelody=function(x){
-    //var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
     scaleArray = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84];
     this.scaleNum=floor(map(x,0,width,0,22));
     this.changeMidiValue=scaleArray[this.scaleNum];
     this.changeFreqValue = midiToFreq(this.changeMidiValue);
-    //this.changeMidiValue=floor(map(mouseX,0,width,48,83));
-    //this.changeFreqValue = midiToFreq(this.changeMidiValue);
-
   }
-
-
 };

@@ -21,10 +21,10 @@ var indicators=[];
 
 var randomId;
 
-var repeller;
 var currentKey=0;
 
 var width;
+var height;
 var currentUsers=[];
 
 var interspace;
@@ -33,48 +33,35 @@ var halfNoteSpace;
 
 function setup() {
   width = document.getElementById('canvas').offsetWidth;
+  height = document.getElementById('canvas').offsetHeight - 5;
   if (width> windowWidth){
     width=windowWidth;
   }
-  var myCanvas = createCanvas(width,800);
+  if (height> windowHeight){
+    height=windowHeight;
+  }
+  var myCanvas = createCanvas(width,height);
   myCanvas.parent('canvas');
 
   frameRate(60);
   background(255);
-  //repeller = new Repeller(20,100,100,200,400);
   
   socketReceiver(); 
 }//set up end
 
 
 function socketReceiver(){
-   id = floor(random(100000));
-   socket = io();
-    //socket
-
-  // socket.on('initialClient',
-  //   function(data){
-  //     console.log("initialClient");
-  //     indicator=new Indicator(data.id,data.x,data.y);
-  //     //fill(123,132,255);
-  //     //ellipse(data.x,data.y,50,50);
-  //     indicators.push(indicator);
-  //   }
-  // );
+  id = floor(random(100000));
+  socket = io();
 
   socket.on('initialUser',
     function(data){
       console.log("initialUser");
-      indicator=new Indicator(data.name,data.id,data.x,data.y);
-      //fill(123,132,255);
-      //ellipse(data.x,data.y,50,50);
-      indicators.push(indicator);
     }
   );
 
   socket.on('updateUserList',
     function(data){
-      //clientMovers[id] = 
       currentUsers= data;
       console.log(currentUsers);
     }
@@ -83,7 +70,6 @@ function socketReceiver(){
 
    socket.on('newmover',
     function(data){
-      //clientMovers[id] = 
       clientMover=new Mover(data.id,data.mass,data.note);
       clientPaintStatus = false;
       clientMovers.push(clientMover);
@@ -169,6 +155,7 @@ function socketReceiver(){
       }
     });
 }//socket end
+
 //------mouse Event---------------------------------------------------
 function mousePressed() {
   var m = bSize/16+random(1,3);
@@ -235,11 +222,9 @@ function draw() {
     if (clientPaintStatus) {
       clientMovers[i].display();  
       fill('rgba(4,202,232, 0.1)');
-      //strokeWeight(interspace);
       noStroke();
       console.log(currentKey+"currentKey");
       rect(currentKey*interspace,0,interspace,80);
-      //line(currentKey*interspace+interspace/2,0,currentKey*interspace+interspace/2,40)  
     }
   }
 
