@@ -12,13 +12,9 @@ var b = [168,98,11,16,119,291,204,132];
 var alpha=0.8;
 
 var clientPaintStatus = false;
-var clientMover;
-var lastClientMover;
+var moverShape;
+var moverShapes=[];
 var cMovers=[];
-var clientMovers=[];
-
-var indicator = null;
-var indicators=[];
 
 var randomId;
 
@@ -72,17 +68,17 @@ function socketReceiver(){
 
    socket.on('newmover',
     function(data){
-      clientMover=new Mover(data.id,data.mass,data.note);
+      moverShape=new Mover(data.id,data.mass,data.note);
       clientPaintStatus = false;
-      clientMovers.push(clientMover);
+      moverShapes.push(moverShape);
     }
   );
   
   socket.on('addposition',
     function(data){
-      for (var i = 0; i < clientMovers.length; i++) {
-          if (clientMovers[i].id === data.id) {
-            clientMovers[i].addPosition(data.x, data.y);
+      for (var i = 0; i < moverShapes.length; i++) {
+          if (moverShapes[i].id === data.id) {
+            moverShapes[i].addPosition(data.x, data.y);
             currentKey=floor(data.x/interspace);
           }
         } 
@@ -92,10 +88,10 @@ function socketReceiver(){
   
   socket.on('finishmover',
     function(data){
-      for (var i = 0; i < clientMovers.length; i++) {
-          if (clientMovers[i].id === data.id) {
-            cMovers.push(clientMovers[i]);
-            //console.log(clientMovers[i].id );
+      for (var i = 0; i < moverShapes.length; i++) {
+          if (moverShapes[i].id === data.id) {
+            cMovers.push(moverShapes[i]);
+            //console.log(moverShapes[i].id );
           }
           clientPaintStatus = false;
         } 
@@ -169,9 +165,9 @@ function draw() {
   //finish draw
 
   //fill current key with blue color;
-  for (var i = 0; i < clientMovers.length; i++) {
+  for (var i = 0; i < moverShapes.length; i++) {
     if (clientPaintStatus) {
-      clientMovers[i].display();  
+      moverShapes[i].display();  
       fill('rgba(4,202,232, 0.3)');
       noStroke();
       if(lastKey!=currentKey){

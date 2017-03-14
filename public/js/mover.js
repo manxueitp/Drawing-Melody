@@ -49,7 +49,7 @@ var Mover = function(id, m, n) {
     this.changeMelody(x);
     this.osc.freq(this.changeFreqValue);
     
-    moversNum=190;
+    moversNum=30;
     if(num<moversNum){
       this.positions.push(this.position); 
     }  
@@ -67,11 +67,11 @@ var Mover = function(id, m, n) {
     
   this.update = function() {
   	for(var i=0; i<this.positions.length;i++){
-    this.velocity.add(this.acceleration);
-    this.positions[i].add(this.velocity);
-    this.acceleration.mult(0);
+      this.velocity.add(this.acceleration);
+      this.positions[i].add(this.velocity);
+      this.acceleration.mult(0);
     }
-    this.lifespan -= 2;
+    this.lifespan -= 6;
     this.alpha=this.lifespan/2;
     this.bcolor= "rgba(" + r[this.note] + "," + g[this.note] + "," + b[this.note] + "," + this.alpha + ")";
   };
@@ -82,7 +82,8 @@ var Mover = function(id, m, n) {
     var mr=this.r-1*i;
     var mg=this.g-1*i;
     var mb=this.b-1*i;
-    stroke(mr,mg,mb,this.alpha);
+    var malpha = this.alpha-i*30; 
+    stroke(mr,mg,mb,malpha);
     line(upx, upy, this.positions[i].x, this.positions[i].y);
     var upx=this.positions[i].x;
     var upy=this.positions[i].y;
