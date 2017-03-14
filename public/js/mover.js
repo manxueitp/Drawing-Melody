@@ -16,22 +16,17 @@ var Mover = function(id, m, n) {
   this.g=g[this.note];
   this.b=b[this.note];
   this.bcolor= "rgba(" + this.r + "," + this.g + "," + this.b + "," + this.alpha + ")";
-  //tconsole.log(this.bcolor);
   this.velocity = createVector(0, 0);
   this.acceleration = createVector(0, 0);
   
   this.positions = [];
   this.uppositions = [];
-  this.midiValue = scaleArray[this.note];
-  this.freqValue = midiToFreq(this.midiValue);
   
   this.osc = new p5.Oscillator();
-  //this.freqtemp=floor(map(mouseX,0,width,0, 500));
-  
+  console.log("add osc!!!")  
   this.scaleNum=floor(map(mouseX,0,width,0,22));
   this.changeMidiValue=scaleArray[this.scaleNum];
   this.changeFreqValue = midiToFreq(this.changeMidiValue);
-  //this.osc.freq(this.freqValue+this.freqtemp);
   this.osc.freq(this.changeFreqValue);
 
   // time, ampLevel
@@ -45,8 +40,7 @@ var Mover = function(id, m, n) {
   this.gain.connect();
   this.env.triggerAttack();
 
-  this.changeFreqValue=0;
-
+  //this.changeFreqValue=0;
   this.count=0;
 
   this.addPosition = function(x, y) {
@@ -57,13 +51,8 @@ var Mover = function(id, m, n) {
     
     moversNum=190;
     if(num<moversNum){
-      this.positions.push(this.position);
-      
-    }else{
-      // this.osc.amp(0, 0.1);
-      // this.osc.stop(0.01);
-    }
-    
+      this.positions.push(this.position); 
+    }  
   };
   
   this.run = function() {
@@ -123,17 +112,15 @@ var Mover = function(id, m, n) {
         this.gain.amp(newAmp);
         this.env.play(this.osc);    
       }
-       else {
-      }
     }
   };
   
   this.isDead = function() {
     
     if (this.lifespan <=0.0) {
-        this.positions=[];
-        this.osc.amp(0, 0.6);
-        this.lifespan=0;
+      this.positions=[];
+      //this.osc.amp(0, 0.6);
+      this.lifespan=0;
       return true;
     } else {
       return false;
@@ -166,10 +153,11 @@ var Mover = function(id, m, n) {
     this.osc.stop();
   }
 
-
   this.kill = function() {
-    this.osc.dispose();
+    this.osc.stop();
     this.env.dispose();
+    this.osc.dispose();
+
   }
 
   this.changeMelody=function(x){

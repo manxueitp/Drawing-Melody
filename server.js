@@ -59,44 +59,28 @@ io.on('connection',
     });
 
     var userId = socket.id;
-    
-    
-
     console.log("We have a new client: " + socket.id);
   
-    // When this user emits, client side: socket.emit('otherevent',some data);
     socket.on('addposition',
       function(data) {
-        // Data comes in as whatever was sent, including objects
-        // console.log("Received: 'mouse' " + data.x + " " + data.y);
-        // Send it to all other clients
         io.sockets.emit('addposition', data);
       }
     );
     
     socket.on('newmover',
       function(data) {
-        // Data comes in as whatever was sent, including objects
-        //console.log("Received: 'newmover' " + data.mass + " " + data.note+" "+ "startIfCp"+ data.ifCP );
-      
-        // Send it to all other clients
         io.sockets.emit('newmover', data);
   
       }
     );
     socket.on('finishmover',
       function(data) {
-       // console.log("Received: 'finishmover' " + data.ifCP );
         io.sockets.emit('finishmover', data);
       }
     );
 
     socket.on('othermovers',
       function(data) {
-        // Data comes in as whatever was sent, including objects
-       // console.log("Received: 'othermovers' " + data.movers + " " + data.size );
-      
-        // Send it to all other clients
         io.sockets.emit('othermovers', data);
   
       }

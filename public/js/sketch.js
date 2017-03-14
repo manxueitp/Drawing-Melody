@@ -13,6 +13,7 @@ var alpha=0.8;
 
 var clientPaintStatus = false;
 var clientMover;
+var lastClientMover;
 var cMovers=[];
 var clientMovers=[];
 
@@ -22,6 +23,7 @@ var indicators=[];
 var randomId;
 
 var currentKey=0;
+var lastKey = 0;
 
 var width;
 var height;
@@ -78,7 +80,6 @@ function socketReceiver(){
   
   socket.on('addposition',
     function(data){
-      
       for (var i = 0; i < clientMovers.length; i++) {
           if (clientMovers[i].id === data.id) {
             clientMovers[i].addPosition(data.x, data.y);
@@ -96,54 +97,10 @@ function socketReceiver(){
             cMovers.push(clientMovers[i]);
             //console.log(clientMovers[i].id );
           }
-          
           clientPaintStatus = false;
         } 
     }
   );
-
-  // socket.on('newmover',
-  //   function(data){
-  //     //clientMovers[id] = 
-  //     clientMover=new Mover(data.id,data.mass,data.note);
-  //     clientPaintStatus = false;
-  //   }
-  // );
-  
-  // socket.on('addposition',
-  //   function(data){
-  //     clientMover.addPosition(data.x, data.y); 
-  //     clientPaintStatus = true;
-  //   }
-  // );
-  
-  // socket.on('finishmover',
-  //   function(data){
-  //     cMovers.push(clientMover);
-  //     if (data.ifCP){
-  //       clientMover.display();
-  //     }
-  //     clientPaintStatus = false;
-  //     //clientMover.stopPlaying(); 
-  //   }
-  // );
-  
-  socket.on('updateMovement',
-    function(data){
-      
-      if (indicators.length > 0) {
-        for (var i = 0; i < indicators.length; i++) {
-          if (indicators[i].id === data.id) {
-            indicators[i].update(data.x, data.y);
-          }
-        }
-      }
-      else {
-        console.log("no indicator");
-        indicator=new Indicator(data.name,data.id,data.x,data.y);
-        indicators.push(indicator);
-      }
-    });
 
   socket.on('disconnect', function (data) {
     console.log("a user disconnected " + data);
@@ -190,9 +147,9 @@ function touchMoved() {
 
 function draw() {
   background(255);
-  
+  //draw piano key
   strokeWeight(2);
-  interspace= width/scaleArray.length;
+  interspace = width/scaleArray.length;
   halfNoteSpace=interspace/5;
 
   stroke(250);
@@ -202,49 +159,44 @@ function draw() {
   for(var i = 0; i < scaleArray.length; i++) {
     stroke(220);
     fill(255);
-    rect(i*interspace, 0, interspace, 80);
+    rect(i*interspace, 0, interspace, 60);
     if(i==1||i==2||i==4||i==5||i==6||i==8||i==9||i==11||i==12||i==13||i==15||i==16||i==18||i==19||i==20){
       fill(220);
       noStroke();
-      rect(i*interspace-halfNoteSpace, 0, halfNoteSpace*2, 46);
+      rect(i*interspace-halfNoteSpace, 0, halfNoteSpace*2, 26);
     }
   }
-  
+  //finish draw
 
-  if (indicators!= []) {
-    for (var i = 0; i < indicators.length; i++) {
-      indicators[i].checkEdges();
-      indicators[i].display();
-  }
- }
-  //console.log(clientPaintStatus);
+  //fill current key with blue color;
   for (var i = 0; i < clientMovers.length; i++) {
     if (clientPaintStatus) {
       clientMovers[i].display();  
-      fill('rgba(4,202,232, 0.1)');
+      fill('rgba(4,202,232, 0.3)');
       noStroke();
-      console.log(currentKey+"currentKey");
-      rect(currentKey*interspace,0,interspace,80);
+      if(lastKey!=currentKey){
+        //console.log(currentKey+"currentKey");
+        rect(currentKey*interspace,0,interspace,60);
+      }
+      lastKey = currentKey;
+      
     }
   }
-
-  
-
+  //
   for (var i = 0; i < cMovers.length; i++) {
-  var wind = createVector(0.01, 0);
-  var gravity = createVector(0, 0.1);
-  cMovers[i].applyForce(wind);
-  cMovers[i].applyForce(gravity);
-  cMovers[i].update();
-  cMovers[i].checkEdges();
-  if(indicators.length>0){
-   cMovers[i].applyRepeller(indicator);}
-   cMovers[i].display();
-    if ( cMovers[i].isDead() ) {
+    var wind = createVector(0.01, 0);
+    var gravity = createVector(0, 0.1);
+    cMovers[i].applyForce(wind);
+    cMovers[i].applyForce(gravity);
+    cMovers[i].update();
+    cMovers[i].checkEdges();
+    cMovers[i].display();
+    if(cMovers[i].isDead()){
       cMovers[i].kill();
       cMovers.splice(i, 1);
     };
   }  
+
 }
 
 

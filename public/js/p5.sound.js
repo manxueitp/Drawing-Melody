@@ -179,7 +179,7 @@ master = function () {
     //put a hard limiter on the output
     this.limiter = audiocontext.createDynamicsCompressor();
     this.limiter.threshold.value = 0;
-    this.limiter.ratio.value = 100;
+    this.limiter.ratio.value = 20;
     this.audiocontext = audiocontext;
     this.output.disconnect();
     // an array of input sources
@@ -3489,7 +3489,7 @@ oscillator = function () {
       this.output.gain.linearRampToValueAtTime(currentVol, now + tFromNow);
       this.output.gain.linearRampToValueAtTime(vol, now + tFromNow + rampTime);
     } else if (vol) {
-      console.log(vol);
+      //console.log(vol);
       vol.connect(self.output.gain);
     } else {
       // return the Gain Node
@@ -4011,7 +4011,7 @@ env = function () {
     wasTriggered = true;
     // we should set current value, but this is not working on Firefox
     var currentVal = this.control.getValue();
-    console.log(currentVal);
+    //console.log(currentVal);
     this.control.cancelScheduledValues(t);
     this.control.linearRampToValueAtTime(currentVal, t);
     if (unit) {
