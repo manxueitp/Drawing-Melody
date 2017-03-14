@@ -195,8 +195,7 @@ function draw() {
       cMovers[i].kill();
       cMovers.splice(i, 1);
     };
-  }  
-
+  }
 }
 
 
@@ -246,3 +245,4 @@ $(window).bind(
     e.preventDefault();
   }
 );
+

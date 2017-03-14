@@ -157,7 +157,7 @@ var Mover = function(id, m, n) {
     this.osc.stop();
     this.env.dispose();
     this.osc.dispose();
-
+    console.log("osc killed")
   }
 
   this.changeMelody=function(x){

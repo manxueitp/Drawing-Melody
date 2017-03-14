@@ -76,6 +76,7 @@ io.on('connection',
     socket.on('finishmover',
       function(data) {
         io.sockets.emit('finishmover', data);
+        console.log(process.memoryUsage());
       }
     );
 
@@ -107,3 +108,12 @@ io.on('connection',
     });
 });
 
+
+// force garbage collector
+
+try {
+  global.gc();
+} catch (e) {
+  console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
+  process.exit();
+}
